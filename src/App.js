@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import data from "./assets/accounts.json";
+import Header from './components/Header';
+import Accounts from './components/Accounts';
+import Account from "./components/Account";
+import Button from './components/Button';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header/>
+      <div className="container">
+        {data.map((accounts, index) => {
+          return(
+            <section>
+              <div className='container-accounts'>
+              <Accounts accounts={accounts} key={index}/> 
+              {accounts.operations.map((operation, index) => {
+                return(
+                  <Account account={operation} key={index} />
+                )
+              })}
+
+              </div>
+              <Button children="SEE MORE"/>
+
+            </section>
+
+          )
+        })}
+      </div>
+
+        
+    
+    </>
+
+
+    
   );
 }
 
